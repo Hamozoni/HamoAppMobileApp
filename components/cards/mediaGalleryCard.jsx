@@ -7,9 +7,9 @@ export default function MediaGalleryCard({ metaData }) {
     const CardComponent = () => {
         switch (metaData.type) {
             case "image":
-                return <ZoomableImage url={metaData.metadata.imageURL} />;
+                return <ZoomableImage url={metaData.metadata.url} />;
             case "video":
-                return <VideoPlayer url={metaData.metadata.videoURL} />;
+                return <VideoPlayer url={metaData.metadata.url} />;
             default:
                 return;
         }
