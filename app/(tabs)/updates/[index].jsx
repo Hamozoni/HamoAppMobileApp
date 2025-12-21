@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import StatusGalleryCard from "../../components/cards/statusGalleryCard";
-import { STATUSES } from "../../constants/status";
+import StatusGalleryCard from "../../../components/cards/statusGalleryCard";
+import { STATUSES } from "../../../constants/status";
 import { useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
 

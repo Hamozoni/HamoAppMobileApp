@@ -3,10 +3,11 @@ import { Stack } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { ChatHeaderLeft, ChatHeaderRight, ChatHeaderMiddle } from "../../../components/chats/chatHeader";
 
 export default function SettingLayout() {
     return (
-        <Stack >
+        <Stack  >
             <Stack.Screen
                 name="index"
                 options={{
@@ -33,7 +34,32 @@ export default function SettingLayout() {
 
                         </View>
                     ),
-                }} />
+                }}
+            />
+            <Stack.Screen
+                name="[id]"
+                tabBarStyle={{ display: "none" }}
+                options={
+                    ({ route }) => {
+                        const { id } = route.params;
+                        return {
+                            headerShown: true,
+                            headerLeft: () => <ChatHeaderLeft id={id} />,
+                            headerRight: () => <ChatHeaderRight id={id} />,
+                            headerTitle: () => <ChatHeaderMiddle id={id} />,
+                        }
+
+                    }
+                }
+            />
+            <Stack.Screen
+                name="mediaGallery"
+                options={{
+                    headerShown: false,
+                    gestureEnabled: false,
+                    tabBarVisible: false,
+                }}
+            />
         </Stack>
     );
 }

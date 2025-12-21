@@ -44,10 +44,10 @@ const RootLayout = () => {
             />
 
             <Tabs.Screen
-                index={0}
                 name="chats"
                 options={{
                     headerShown: false,
+
                     title: "Chats",
                     tabBarIcon: ({ focused, size, color }) => (
                         <Ionicons name={focused ? "chatbubbles" : "chatbubbles-outline"} size={size} color={color} />

@@ -2,11 +2,11 @@ import { View, FlatList, Image, StyleSheet } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { runOnJS } from 'react-native-worklets';
-import MediaGalleryCard from '../../components/cards/mediaGalleryCard';
-import MediaGalleryHeader from '../../components/mediaGallery/galleryHeader';
-import MediaGalleryFooter from '../../components/mediaGallery/galleryFooter';
+import MediaGalleryCard from '../../../components/cards/mediaGalleryCard';
+import MediaGalleryHeader from '../../../components/mediaGallery/galleryHeader';
+import MediaGalleryFooter from '../../../components/mediaGallery/galleryFooter';
 import { useRouter } from 'expo-router';
-import { MESSAGES } from '../../constants/messages';
+import { MESSAGES } from '../../../constants/messages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const messages = MESSAGES.filter((item) => item.type === "image" || item.type === "video");

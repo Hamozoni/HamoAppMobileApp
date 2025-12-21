@@ -29,21 +29,21 @@ const Button = ({ title, active = false }) => {
 const Chats = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1 }}>
-                <View style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 10, paddingTop: 140 }}>
-                    <View style={{ marginVertical: 10 }}>
-                        <ScrollView horizontal contentContainerStyle={{ flexDirection: "row", alignItems: "center", justifyContent: "center", height: 50, maxHeight: 50 }} showsHorizontalScrollIndicator={false}>
+            <ScrollView style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 10, paddingTop: 140 }}>
+                <View style={{ marginVertical: 10 }}>
+                    <ScrollView horizontal contentContainerStyle={{ flexDirection: "row", alignItems: "center", justifyContent: "center", height: 50, maxHeight: 50 }} showsHorizontalScrollIndicator={false}>
+                        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                             <Button title="All" active={true} />
                             <Button title="Unread" />
                             <Button title="Favorite" />
                             <Button title="Groups" />
                             <Button title="Communities" />
-                        </ScrollView>
-
-                    </View>
-                    <ChatsLists chats={CHATS} />
+                        </View>
+                    </ScrollView>
 
                 </View>
+                <ChatsLists chats={CHATS} />
+
             </ScrollView>
         </SafeAreaView>
     );
