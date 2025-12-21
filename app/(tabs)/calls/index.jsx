@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const Calls = () => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-            <ScrollView style={{ flex: 1, paddingHorizontal: 10, paddingTop: 140 }}>
+            <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerStyle={{ flex: 1, paddingHorizontal: 10 }}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 20 }}>
                     <View style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 5 }}>
                         <RoundedBtn iconName="call-outline" large={true} />

@@ -25,8 +25,8 @@ const settingsData3 = [
 
 const Settings = () => {
     return (
-        <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
-            <ScrollView style={{ padding: 10, paddingTop: 140 }}>
+        <SafeAreaView edges={["top"]}>
+            <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerStyle={{ padding: 10 }}>
                 <View style={{ flex: 1 }}>
                     <ProfileInfo />
 
