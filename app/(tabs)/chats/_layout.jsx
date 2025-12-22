@@ -70,9 +70,7 @@ export default function SettingLayout() {
                     title: "New Chat",
                     headerShown: true,
                     gestureEnabled: false,
-                    tabBarVisible: false,
                     presentation: "modal",
-                    modalPresentationStyle: "formSheet",
                     headerRight: () => (
                         <TouchableOpacity onPress={() => router.back()}>
                             <Ionicons name="close" size={26} />
