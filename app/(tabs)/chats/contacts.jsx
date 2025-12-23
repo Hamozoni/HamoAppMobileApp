@@ -45,7 +45,7 @@ export default function ContactsPage() {
         })()
     }, []);
 
-    const Bottons = ({ text, iconName, index }) => {
+    const Buttons = ({ text, iconName, index }) => {
         return (
             <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <Ionicons name={iconName} size={24} color="#07d400ff" />
@@ -90,7 +90,7 @@ export default function ContactsPage() {
                 <View style={{ backgroundColor: "#fff", paddingHorizontal: 16, borderRadius: 10, marginVertical: 20 }}>
                     {
                         bottons.map(({ text, iconName, id }, index) => (
-                            <Bottons key={id} text={text} iconName={iconName} index={index} />
+                            <Buttons key={id} text={text} iconName={iconName} index={index} />
                         ))
                     }
                 </View>

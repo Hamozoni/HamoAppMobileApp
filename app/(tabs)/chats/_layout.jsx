@@ -26,7 +26,7 @@ export default function SettingLayout() {
                     ),
                     headerRight: () => (
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={() => router.push("/chats/camera")} >
                                 <Ionicons name="camera" size={26} />
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -80,6 +80,14 @@ export default function SettingLayout() {
                         placeholder: "Search name or number",
                     },
 
+                }}
+            />
+            <Stack.Screen
+                name="camera"
+                options={{
+                    headerShown: false,
+                    gestureEnabled: false,
+                    tabBarVisible: false,
                 }}
             />
         </Stack>

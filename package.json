@@ -12,8 +12,10 @@
     "@react-native-community/slider": "5.0.1",
     "expo": "54.0.29",
     "expo-audio": "~1.1.0",
+    "expo-camera": "~17.0.10",
     "expo-constants": "~18.0.12",
     "expo-contacts": "~15.0.11",
+    "expo-image": "~3.0.11",
     "expo-linking": "~8.0.10",
     "expo-router": "~6.0.19",
     "expo-status-bar": "~3.0.9",
@@ -29,5 +31,9 @@
     "react-native-svg": "15.12.1",
     "react-native-worklets": "^0.5.1"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
+  }
 }
