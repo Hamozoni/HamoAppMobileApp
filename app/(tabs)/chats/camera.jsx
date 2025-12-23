@@ -72,7 +72,7 @@ export default function CameraScreen() {
                     {
                         mode === "video" && (
                             <View style={{ backgroundColor: "#a09494ff", padding: 10, paddingHorizontal: 20, borderRadius: 20, alignItems: "center" }}>
-                                <Text style={{ color: "white", fontWeight: "bold" }}>00:00</Text>
+                                <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>00:00</Text>
                             </View>
                         )
                     }
@@ -87,7 +87,9 @@ export default function CameraScreen() {
                     responsiveOrientationWhenOrientationLocked
                 />
                 <View style={styles.shutterContainer}>
-                    <View>
+                    <View style={{ flexDirection: "row", alignItems: "center", gap: 10, justifyContent: "space-around" }}>
+                        <RoundedBtn iconName="image" large={true} />
+                        <RoundedBtn iconName="color-wand" />
                         <Pressable onPress={mode === "picture" ? takePicture : recordVideo}>
                             {({ pressed }) => (
                                 <View
@@ -109,6 +111,13 @@ export default function CameraScreen() {
                                 </View>
                             )}
                         </Pressable>
+
+
+                        <TouchableOpacity style={{ backgroundColor: "#ffffffff", padding: 10, borderRadius: "50%", alignItems: "center" }}>
+                            <Text>1 ×</Text>
+                        </TouchableOpacity>
+                        <RoundedBtn iconName="camera-reverse-outline" large={true} onPress={() => setFacing(facing === "back" ? "front" : "back")} />
+
 
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "center", width: "100%", gap: 10, justifyContent: "center", backgroundColor: "#00000071", padding: 10, borderRadius: 20, marginTop: 10 }}>
