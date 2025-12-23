@@ -69,6 +69,13 @@ export default function CameraScreen() {
             <View style={styles.cameraContainer}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", position: "absolute", top: 40, left: 0, right: 0, height: 50, zIndex: 1, paddingHorizontal: 20 }}>
                     <RoundedBtn iconName="close" large={true} onPress={() => router.back()} />
+                    {
+                        mode === "video" && (
+                            <View style={{ backgroundColor: "#a09494ff", padding: 10, paddingHorizontal: 20, borderRadius: 20, alignItems: "center" }}>
+                                <Text style={{ color: "white", fontWeight: "bold" }}>00:00</Text>
+                            </View>
+                        )
+                    }
                     <RoundedBtn iconName="flash" large={true} />
                 </View>
                 <CameraView
@@ -104,12 +111,12 @@ export default function CameraScreen() {
                         </Pressable>
 
                     </View>
-                    <View style={{ flexDirection: "row", alignItems: "center", width: "100%", gap: 10 }}>
+                    <View style={{ flexDirection: "row", alignItems: "center", width: "100%", gap: 10, justifyContent: "center", backgroundColor: "#00000071", padding: 10, borderRadius: 20, marginTop: 10 }}>
                         <TouchableOpacity onPress={() => setMode("picture")}>
-                            <Text style={{ color: mode === "picture" ? "white" : "black" }}>Picture</Text>
+                            <Text style={{ color: mode === "picture" ? "#329b13ff" : "white", fontWeight: "bold" }}>Picture</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setMode("video")}>
-                            <Text style={{ color: mode === "video" ? "white" : "black" }}>Video</Text>
+                            <Text style={{ color: mode === "video" ? "#329b13ff" : "white", fontWeight: "bold" }}>Video</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
