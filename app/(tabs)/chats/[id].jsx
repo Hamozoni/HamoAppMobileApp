@@ -29,12 +29,10 @@ export default function ChatDetails() {
                 showsVerticalScrollIndicator={false}
             />
 
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                keyboardVerticalOffset="100"
-            >
-                <ChatFooter id={id} />
-            </KeyboardAvoidingView>
+
+
+            <ChatFooter id={id} />
+
         </SafeAreaView>
     );
 }
