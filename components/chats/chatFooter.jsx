@@ -23,15 +23,7 @@ export default function ChatFooter({ id }) {
     }, []);
 
     const toggleAttachment = () => {
-        if (!isAttachment) {
-            Keyboard.dismiss();
-            setTimeout(() => setIsAttachment(false), 100);
-        } else {
-            setIsAttachment(true);
-            textInputRef.current.focus();
-        }
 
-        console.log(textInputRef.current.isFocused())
     }
 
 
