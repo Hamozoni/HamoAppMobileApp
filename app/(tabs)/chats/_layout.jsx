@@ -22,6 +22,7 @@ export default function SettingLayout() {
             />
             <Stack.Screen
                 name="[id]"
+
                 options={
                     ({ route }) => {
                         const { id } = route.params;
@@ -37,6 +38,7 @@ export default function SettingLayout() {
             />
             <Stack.Screen
                 name="mediaGallery"
+
                 options={{
                     headerShown: false,
                     gestureEnabled: false,
@@ -48,7 +50,6 @@ export default function SettingLayout() {
                 options={{
                     title: "New Chat",
                     headerShown: true,
-                    gestureEnabled: false,
                     presentation: "modal",
                     headerRight: () => (
                         <TouchableOpacity onPress={() => router.back()}>
@@ -64,6 +65,8 @@ export default function SettingLayout() {
             <Stack.Screen
                 name="camera"
                 options={{
+                    presentation: "fullScreenModal",
+                    animation: "flip",
                     headerShown: false,
                     gestureEnabled: false,
                     tabBarVisible: false,

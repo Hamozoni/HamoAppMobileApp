@@ -1,6 +1,7 @@
 import { TextInput, TouchableOpacity, View, Keyboard, KeyboardAvoidingView, Platform } from "react-native";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useEffect, useState, useRef } from "react";
+import Animated from "react-native-reanimated";
 
 export default function ChatFooter({ id }) {
 
@@ -23,7 +24,14 @@ export default function ChatFooter({ id }) {
     }, []);
 
     const toggleAttachment = () => {
-
+        setIsAttachment(prev => {
+            if (prev) {
+                textInputRef.current.focus();
+            } else {
+                textInputRef.current.blur();
+            }
+            return !prev
+        });
     }
 
 
@@ -52,8 +60,6 @@ export default function ChatFooter({ id }) {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInputRef}
-                        onFocus={() => setIsAttachment(false)}
-                        onBlur={() => setIsAttachment(true)}
                         placeholder="Type a message"
                         style={{ height: 30, flex: 1, borderWidth: 1, borderColor: "#ccc", borderRadius: 20, paddingHorizontal: 10 }}
                     />

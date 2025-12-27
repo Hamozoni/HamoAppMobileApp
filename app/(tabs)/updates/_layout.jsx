@@ -25,6 +25,7 @@ export default function UpdatesLayout() {
             <Stack.Screen
                 name="[index]"
                 options={{
+                    animation: "flip",
                     headerShown: false,
                 }} />
         </Stack>
