@@ -3,11 +3,13 @@ import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "expo-router";
 import FooterAttachment from "./footerAttachment";
+import AudioRecorder from "./audioRecorder";
 
 export default function ChatFooter({ id }) {
 
     const [keyboardHeight, setKeyboardHeight] = useState(336);
     const [isAttachment, setIsAttachment] = useState(false);
+    const [isAudioRecorder, setIsAudioRecorder] = useState(false);
     const textInputRef = useRef(null);
     const router = useRouter();
 
@@ -73,7 +75,7 @@ export default function ChatFooter({ id }) {
                         <TouchableOpacity onPress={() => router.push("/chats/camera")}>
                             <Ionicons name="camera-outline" size={28} color="#1fa105" />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => setIsAudioRecorder(true)}>
                             <Ionicons name="mic-outline" size={28} color="#1fa105" />
                         </TouchableOpacity>
                     </View>
@@ -81,6 +83,10 @@ export default function ChatFooter({ id }) {
                 {
                     isAttachment &&
                     <FooterAttachment keyboardHeight={keyboardHeight} />
+                }
+                {
+                    isAudioRecorder &&
+                    <AudioRecorder setIsAudioRecorder={setIsAudioRecorder} />
                 }
             </View>
         </KeyboardAvoidingView>

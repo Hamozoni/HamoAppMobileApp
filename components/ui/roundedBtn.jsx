@@ -1,12 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
-export const RoundedBtn = ({ iconName, large = false, onPress = () => '' }) => {
+export const RoundedBtn = ({ iconName, onPress = () => '', styles, size = 24, color = "black" }) => {
     return (
         <TouchableOpacity
             onPress={onPress}
-            style={{ width: large ? 45 : 30, height: large ? 45 : 30, borderRadius: "50%", backgroundColor: "#eeeeeeff", justifyContent: "center", alignItems: "center" }}>
-            <Ionicons name={iconName} size={large ? 30 : 24} />
+            style={[{ justifyContent: "center", alignItems: "center", borderRadius: "50%", padding: 10 }, styles]}>
+            <Ionicons name={iconName} size={size} color={color} />
         </TouchableOpacity>
     );
 };
