@@ -75,7 +75,7 @@ const Chats = () => {
 
 
     return (
-        <SafeAreaView style={{ flex: 1 }} edges={["top"]} aria-modal>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 10 }} edges={["top"]}>
             <Stack.Screen
                 options={{
                     headerLeft: () => (
@@ -101,65 +101,52 @@ const Chats = () => {
                     tabBarStyle: { display: "none" }
                 }}
             />
-            <ScrollView
+            <FlatList
                 contentInsetAdjustmentBehavior="automatic"
-                contentContainerStyle={{
-                    flex: 1,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 10
-                }}
-            >
-                <View style={{ flex: 1 }}>
-
-                    <View style={{ paddingVertical: 20 }}>
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-
+                data={CHATS}
+                renderItem={({ item }) => (
+                    <Animated.View style={[animChatCard, { flexDirection: "row", alignItems: "center", gap: 10 }]}>
+                        <TouchableOpacity
+                            onPress={() => handleSelectChat(item)}
+                            style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: "50%",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                borderWidth: selectedChats.includes(item) ? 0 : 3,
+                                borderColor: "#d4d2d2ff",
+                                backgroundColor: selectedChats.includes(item) ? "#12729eff" : "transparent"
+                            }}>
                             {
-                                ["All", "Unread", "Favorite", "Groups", "Communities"].map((item) => (
-                                    <Button title={item} active={activeButton} setActive={setActiveButton} />
-                                ))
+                                selectedChats.includes(item) && (
+                                    <Ionicons name="checkmark" size={26} color="white" />
+                                )
                             }
-                        </ScrollView>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        <FlatList
-                            data={CHATS}
-                            renderItem={({ item }) => (
-                                <Animated.View style={[animChatCard, { flexDirection: "row", alignItems: "center", gap: 10 }]}>
-                                    <TouchableOpacity
-                                        onPress={() => handleSelectChat(item)}
-                                        style={{
-                                            width: 30,
-                                            height: 30,
-                                            borderRadius: "50%",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            borderWidth: selectedChats.includes(item) ? 0 : 3,
-                                            borderColor: "#d4d2d2ff",
-                                            backgroundColor: selectedChats.includes(item) ? "#12729eff" : "transparent"
-                                        }}>
-                                        {
-                                            selectedChats.includes(item) && (
-                                                <Ionicons name="checkmark" size={26} color="white" />
-                                            )
-                                        }
-                                    </TouchableOpacity>
-                                    <Animated.View style={animTimeLine}>
-                                        <ChatCard key={item.id} chat={item} />
-                                    </Animated.View>
-                                </Animated.View>
-                            )}
-                            keyExtractor={(item) => item.id}
-                            contentContainerStyle={{ gap: 10 }}
-                            showsVerticalScrollIndicator={false}
-                        />
+                        </TouchableOpacity>
+                        <Animated.View style={animTimeLine}>
+                            <ChatCard key={item.id} chat={item} />
+                        </Animated.View>
+                    </Animated.View>
+                )}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={{ gap: 10 }}
+                showsVerticalScrollIndicator={false}
+                ListHeaderComponent={() => (
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ marginBottom: 10, marginTop: 20 }}
+                        contentInsetAdjustmentBehavior="automatic">
 
-                    </View>
-
-                </View>
-
-
-            </ScrollView>
+                        {
+                            ["All", "Unread", "Favorite", "Groups", "Communities"].map((item) => (
+                                <Button key={item} title={item} active={activeButton} setActive={setActiveButton} />
+                            ))
+                        }
+                    </ScrollView>
+                )}
+            />
             {
                 isEdit && (
                     <View

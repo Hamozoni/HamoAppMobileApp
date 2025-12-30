@@ -1,4 +1,3 @@
-import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ChatFooter from "../../../components/chats/chatWindowFooter/chatFooter";
@@ -15,9 +14,7 @@ export default function ChatDetails() {
             edges={["bottom"]}
             style={{
                 flex: 1,
-                flexDirection: "column",
-                justifyContent: "space-between",
-                backgroundColor: "#fff"
+                backgroundColor: "#fff",
             }}
         >
 
@@ -30,6 +27,8 @@ export default function ChatDetails() {
             />
 
             <ChatFooter id={id} />
+
+
 
         </SafeAreaView>
     );

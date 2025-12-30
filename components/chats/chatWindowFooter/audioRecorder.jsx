@@ -1,6 +1,5 @@
-import { View, Text, TouchableOpacity, Alert } from "react-native";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { View, Text, Alert } from "react-native";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { RoundedBtn } from "../../ui/roundedBtn";
 
 import {
@@ -49,7 +48,7 @@ export default function AudioRecorder({ setIsAudioRecorder }) {
 
     const stopRecording = async () => {
         // The recording will be available on `audioRecorder.uri`.
-        await audioRecorder.stop();
+        await audioRecorder?.stop();
 
         if (audioRecorder.uri) {
             setRecordUri(audioRecorder.uri);
@@ -72,10 +71,6 @@ export default function AudioRecorder({ setIsAudioRecorder }) {
             startRecording();
         })();
 
-        return () => {
-            clearWaveAndTimer();
-            stopRecording();
-        }
     }, []);
 
 

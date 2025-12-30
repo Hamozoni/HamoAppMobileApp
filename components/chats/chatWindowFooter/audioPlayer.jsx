@@ -33,6 +33,9 @@ export default function AudioPlayer({ uri }) {
             player?.pause();
         }
     }, []);
+
+    if (!player) return null;
+
     return (
         <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
             <TouchableOpacity onPress={togglePlay}>
@@ -45,8 +48,8 @@ export default function AudioPlayer({ uri }) {
             <View style={{ flex: 1 }}>
                 <Slider
                     minimumValue={0}
-                    maximumValue={player?.duration}
-                    value={player?.position}
+                    maximumValue={player.duration}
+                    value={player.currentTime}
                     onSlidingComplete={onSeek}
                     minimumTrackTintColor="#FFFFFF"
                     maximumTrackTintColor="#252121ff"
@@ -55,7 +58,7 @@ export default function AudioPlayer({ uri }) {
 
                 />
             </View>
-            <Text>{formatTime(player?.position || 0)}</Text>
+            <Text>{formatTime(Math.floor(player.currentTime))}</Text>
 
         </View>
     );
