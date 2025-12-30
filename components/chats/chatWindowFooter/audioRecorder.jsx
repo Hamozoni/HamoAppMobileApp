@@ -1,175 +1,115 @@
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { RoundedBtn } from "../../ui/roundedBtn";
 
 import {
-    useAudioRecirder,
-    useAudioPlayerStatus,
-    useAudioPlayerState,
-    useAudioRecorderStatus,
-    createAudioPlayer,
-    AudioPlayerStatus,
-    setAudioModeAsync,
-    RecordingPresets,
+    useAudioRecorder,
     AudioModule,
-    useAudioRecorder
+    RecordingPresets,
+    setAudioModeAsync,
+    useAudioRecorderState,
+} from 'expo-audio';
 
-} from "expo-audio"
+import { FlatList } from "react-native-gesture-handler";
+import { formatTime } from "../../utils/formatTime";
+import AudioPlayer from "./audioPlayer";
 
 export default function AudioRecorder({ setIsAudioRecorder }) {
 
-    // Recording state
-    const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY, {
-        onRecordingStatusUpdate: (status) => {
-            console.log(status);
-        }
-    });
-    const recorderState = useAudioRecorderStatus(audioRecorder);
 
-    // Playback state for recorded audio
-
-    const [playbackPlayer, setPlaybackPlayer] = useState(null);
-    const [playbackStatus, setPlaybackStatus] = useState(null);
-
-    //  UI state
-    const [recordingUri, setRecordingUri] = useState(null);
-    const [isLocked, setIsLocked] = useState(false);
+    const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+    const recorderState = useAudioRecorderState(audioRecorder);
+    const [recordUri, setRecordUri] = useState(null);
+    const [wave, setWave] = useState([]);
     const [recordTime, setRecordTime] = useState(0);
-
     const timerRef = useRef(null);
+    const waveRef = useRef(null);
+    const flatListRef = useRef(null);
 
-    // Audio players for sound effects (using createAudioPlayer for manual management)
-    const soundEffectPlayerRef = useRef(null);
-    // Initialize audio mode and permissions
+    const startRecording = async () => {
+        await audioRecorder.prepareToRecordAsync();
+        audioRecorder.record();
+        timerRef.current = setInterval(() => {
+            setRecordTime(prev => prev + 1);
+        }, 1000);
+        waveRef.current = setInterval(() => {
+            setWave(prev => [...prev, Math.floor(Math.random() * 25)]);
+        }, 100);
+    };
 
-    useEffect(() => {
-        (
-            async () => {
-                // Request recording permissions
-
-                const { granted } = await AudioModule.requestPermissionsAsync();
-                if (!granted) {
-                    Alert.alert('Permission to access microphone was denied');
-                }
-                // Configure audio mode for recording and playback
-                await setAudioModeAsync({
-
-                    playsInSilentMode: true,
-                    allowsRecording: true,
-                    staysActiveInBackground: true,
-                    shouldDuckAndroid: true,
-                    shouldDuckIOS: true,
-
-                })
-            }
-        )();
-
-        return () => {
-            if (timerRef.current) {
-                clearInterval(timerRef.current);
-            }
-
-            if (playbackPlayer) {
-                playbackPlayer.release();
-            };
-
-            if (soundEffectPlayerRef.current) {
-                soundEffectPlayerRef.current.release();
-            }
-        }
-    }, []);
-    // Timer for recording
-    useEffect(() => {
-        if (recorderState.isRecording) {
-            timerRef.current = setInterval(() => {
-                setRecordTime(prev => prev + 1);
-            }, 1000);
-        } else {
+    const clearWaveAndTimer = () => {
+        if (timerRef.current) {
             clearInterval(timerRef.current);
-        };
-
-        return () => {
-            if (timerRef.current) {
-                clearInterval(timerRef.current);
-            }
         }
-    }, [recorderState.isRecording]);
-
-    // Load and play a sound effect using expo-audio
-
-    const playsoundEffect = useCallback(async (source) => {
-        try {
-            // Release previous sound effect if exists
-
-            if (soundEffectPlayerRef.current) {
-                soundEffectPlayerRef.current.release();
-            };
-
-            // Create a new audio player for the sound effect
-
-            const player = createAudioPlayer(source);
-            soundEffectPlayerRef.current = player;
-
-            // Play the sound
-
-            await player.play();
-
-            // Automatically release when done
-
-            player.setOnPlaybackStatusUpdate((status) => {
-                if (status.didJustFinish) {
-                    player.release();
-                    soundEffectPlayerRef.current = null;
-                }
-            })
-        } catch (error) {
-            console.error('Failed to play sound effect', error);
-        }
-    }, []);
-
-    // Start recording
-
-    const startRecording = useCallback(async () => {
-        try {
-            setRecordTime(0);
-            await audioRecorder.prepareToRecordAsync();
-            audioRecorder.startRecording();
-        } catch (error) {
-            console.error('Failed to start recording', error);
-        }
-    }, []);
-
-    // Stop recording
-
-    const stopRecording = async () => {
-        try {
-            await audioRecorder.stopRecording();
-
-            const uri = audioRecorder.uri;
-            setRecordingUri(uri);
-
-            // if(onRecordingCompleted){
-            //     onRecordingCompleted(uri);
-            // }
-        } catch (error) {
-            console.error('Failed to stop recording', error);
+        if (waveRef.current) {
+            clearInterval(waveRef.current);
         }
     };
 
+    const stopRecording = async () => {
+        // The recording will be available on `audioRecorder.uri`.
+        await audioRecorder.stop();
+
+        if (audioRecorder.uri) {
+            setRecordUri(audioRecorder.uri);
+        }
+        clearWaveAndTimer()
+
+    };
+
+    useEffect(() => {
+        (async () => {
+            const status = await AudioModule.requestRecordingPermissionsAsync();
+            if (!status.granted) {
+                Alert.alert('Permission to access microphone was denied');
+            }
+
+            setAudioModeAsync({
+                playsInSilentMode: true,
+                allowsRecording: true,
+            });
+            startRecording();
+        })();
+
+        return () => {
+            clearWaveAndTimer();
+            stopRecording();
+        }
+    }, []);
 
 
+    useLayoutEffect(() => {
+        if (wave.length > 0 && flatListRef.current) {
+            flatListRef.current.scrollToEnd({ animated: true });
+        }
+    }, [wave]);
 
     return (
         <View style={{ padding: 20, position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 999, backgroundColor: "#fff" }}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 10 }}>
-                <Text>{timer}</Text>
-                <View>
+                {
+                    (!recorderState.isRecording && recordUri) ?
+                        <AudioPlayer uri={recordUri} />
+                        :
+                        <>
+                            <Text style={{ fontSize: 16, fontWeight: "bold", color: "black" }}>{formatTime(recordTime)}</Text>
+                            <FlatList
+                                horizontal
+                                data={wave}
+                                contentContainerStyle={{ gap: 0.3, height: 30 }}
+                                keyExtractor={(item, index) => index.toString()}
+                                showsHorizontalScrollIndicator={false}
+                                ref={flatListRef}
+                                renderItem={({ item }) => (
+                                    <View style={{ height: item, width: 2, backgroundColor: "#ccc", alignSelf: "center" }} />
+                                )}
+                            />
 
-                </View>
-                <TouchableOpacity>
-                    <MaterialCommunityIcons name="timer-alert-outline" size={24} color="black" />
-                </TouchableOpacity>
+                        </>
+
+                }
+
             </View>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10, justifyContent: "space-between" }}>
                 <RoundedBtn
@@ -179,20 +119,20 @@ export default function AudioRecorder({ setIsAudioRecorder }) {
                     styles={{ padding: 0 }}
                 />
                 {
-                    isRecording ?
+                    recorderState.isRecording ?
                         <RoundedBtn
                             iconName="pause-outline"
                             size={24}
                             color="red"
                             styles={{ borderColor: "red", borderWidth: 2, padding: 3 }}
-                            onPress={() => setIsRecording(false)}
+                            onPress={stopRecording}
                         /> :
                         <RoundedBtn
                             iconName="mic-outline"
                             size={34}
                             styles={{ padding: 0 }}
                             color="red"
-                            onPress={() => setIsRecording(true)}
+                            onPress={startRecording}
                         />
                 }
                 <RoundedBtn
