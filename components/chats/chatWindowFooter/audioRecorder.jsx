@@ -1,13 +1,96 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RoundedBtn } from "../../ui/roundedBtn";
+
+import {
+    useAudioRecirder,
+    useAudioPlayerStatus,
+    useAudioPlayerState,
+    useAudioRecorderStatus,
+    createAudioPlayer,
+    AudioPlayerStatus,
+    setAudioModeAsync,
+    RecordingPresets,
+    AudioModule,
+    useAudioRecorder
+
+} from "expo-audio"
 
 export default function AudioRecorder({ setIsAudioRecorder }) {
 
-    const [timer, setTimer] = useState(0);
-    const [isRecording, setIsRecording] = useState(true);
-    const [recording, setRecording] = useState(null);
+    // Recording state
+    const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY, {
+        onRecordingStatusUpdate: (status) => {
+            console.log(status);
+        }
+    });
+    const recorderState = useAudioRecorderStatus(audioRecorder);
+
+    // Playback state for recorded audio
+
+    const [playbackPlayer, setPlaybackPlayer] = useState(null);
+    const [playbackStatus, setPlaybackStatus] = useState(null);
+
+    //  UI state
+    const [recordingUri, setRecordingUri] = useState(null);
+    const [isLocked, setIsLocked] = useState(false);
+    const [recordTime, setRecordTime] = useState(0);
+
+    const timerRef = useRef(null);
+
+    // Audio players for sound effects (using createAudioPlayer for manual management)
+    const soundEffectPlayerRef = useRef(null);
+    // Initialize audio mode and permissions
+
+    useEffect(() => {
+        (
+            async () => {
+                // Request recording permissions
+
+                const { granted } = await AudioModule.requestPermissionsAsync();
+                if (!granted) {
+                    Alert.alert('Permission to access microphone was denied');
+                }
+                // Configure audio mode for recording and playback
+                await setAudioModeAsync({
+
+                    playsInSilentMode: true,
+                    allowsRecording: true,
+                    staysActiveInBackground: true,
+                    shouldDuckAndroid: true,
+                    shouldDuckIOS: true,
+
+                })
+            }
+        )();
+
+        return () => {
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
+
+            if (playbackPlayer) {
+                playbackPlayer.release();
+            };
+
+            if (soundEffectPlayerRef.current) {
+                soundEffectPlayerRef.current.release();
+            }
+        }
+    }, []);
+    // Timer for recording
+    useEffect(() => {
+        if (recorderState.isRecording) {
+            timerRef.current = setInterval(() => {
+                setRecordTime(prev => prev + 1);
+            }, 1000);
+        } else {
+            clearInterval(timerRef.current);
+        }
+    }, [recorderState.isRecording]);
+
+
 
 
     return (
