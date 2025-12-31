@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function FooterAttachment({ keyboardHeight }) {
 
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedAssets, setSelectedAssets] = useState(null);
 
     const pickImage = async () => {
         const states = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -22,9 +22,11 @@ export default function FooterAttachment({ keyboardHeight }) {
 
         console.log(result);
 
-        if (!result.canceled) {
-            setSelectedImage(result.assets[0].uri);
-        };
+        if (result.canceled) {
+            return
+        } else {
+            setSelectedAssets(result.assets);
+        }
     };
 
 
