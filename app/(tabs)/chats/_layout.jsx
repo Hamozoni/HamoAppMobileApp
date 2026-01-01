@@ -38,7 +38,6 @@ export default function SettingLayout() {
             />
             <Stack.Screen
                 name="mediaGallery"
-
                 options={{
                     headerShown: false,
                     gestureEnabled: false,
