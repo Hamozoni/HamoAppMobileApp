@@ -28,9 +28,10 @@ export default function AudioPlayer({ uri }) {
 
     useEffect(() => {
 
-        console.log(player);
         return () => {
-            player?.pause();
+            if (isPlaying) {
+                player?.pause();
+            }
         }
     }, []);
 

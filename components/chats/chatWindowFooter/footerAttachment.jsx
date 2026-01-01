@@ -2,10 +2,12 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { Ionicons, FontAwesome6, Entypo, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 
 export default function FooterAttachment({ keyboardHeight }) {
 
     const [selectedAssets, setSelectedAssets] = useState(null);
+    const router = useRouter();
 
     const pickImage = async () => {
         const states = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -46,7 +48,7 @@ export default function FooterAttachment({ keyboardHeight }) {
                     <Text style={styles.attachmentItemText}>Camera</Text>
                 </View>
                 <View style={styles.attachmentItem}>
-                    <TouchableOpacity style={styles.attachmentItemButton}>
+                    <TouchableOpacity style={styles.attachmentItemButton} onPress={() => router.push("/chats/location")}>
                         <FontAwesome6 name="location-dot" size={34} color="#54ce49ee" />
                     </TouchableOpacity>
                     <Text style={styles.attachmentItemText}>Location</Text>

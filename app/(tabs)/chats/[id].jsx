@@ -4,7 +4,7 @@ import ChatFooter from "../../../components/chats/chatWindowFooter/chatFooter";
 import MessageCard from "../../../components/cards/messageCard";
 import { FlatList } from "react-native";
 import { MESSAGES } from "../../../constants/messages";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export default function ChatDetails() {
 

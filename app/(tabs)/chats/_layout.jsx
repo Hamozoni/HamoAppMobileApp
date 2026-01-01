@@ -1,6 +1,6 @@
 
 import { Stack, useRouter } from "expo-router";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ChatHeaderLeft, ChatHeaderRight, ChatHeaderMiddle } from "../../../components/chats/chatHeader";
 
@@ -58,6 +58,29 @@ export default function SettingLayout() {
                     ),
                     headerSearchBarOptions: {
                         placeholder: "Search name or number",
+                    },
+
+                }}
+            />
+
+            <Stack.Screen
+                name="location"
+                options={{
+                    title: "Send Location",
+                    headerShown: true,
+                    presentation: "modal",
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => router.back()}>
+                            <Ionicons name="refresh" size={28} color="black" />
+                        </TouchableOpacity>
+                    ),
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => router.back()}>
+                            <Text style={{ color: "black", fontSize: 16, fontWeight: "bold" }}>Cancel</Text>
+                        </TouchableOpacity>
+                    ),
+                    headerSearchBarOptions: {
+                        placeholder: "Search or enter an address",
                     },
 
                 }}
