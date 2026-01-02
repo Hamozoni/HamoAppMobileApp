@@ -61,6 +61,28 @@ export default function SettingLayout() {
 
                 }}
             />
+            <Stack.Screen
+                name="shareContacts"
+                options={{
+                    title: "Share Contacts",
+                    headerShown: true,
+                    presentation: "modal",
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => router.back()}>
+                            <Text style={{ color: "black", fontSize: 16, fontWeight: "bold" }}>Cancel</Text>
+                        </TouchableOpacity>
+                    ),
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => router.back()}>
+                            <Text style={{ color: "black", fontSize: 16, fontWeight: "bold" }}>Next</Text>
+                        </TouchableOpacity>
+                    ),
+                    headerSearchBarOptions: {
+                        placeholder: "Search",
+                    },
+
+                }}
+            />
 
             <Stack.Screen
                 name="location"

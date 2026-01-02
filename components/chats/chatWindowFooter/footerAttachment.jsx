@@ -42,10 +42,7 @@ export default function FooterAttachment({ keyboardHeight, setIsAttachment }) {
             if (!result.canceled) {
                 // The selected file's information is in result.assets[0]
                 const file = result.assets[0];
-                console.log('File picked:', file.name);
-                console.log('File URI:', file.uri);
-                console.log('File size:', file.size);
-                console.log('File size:', file);
+                setSelectedDocument(file);
                 // You can now use this URI for upload or processing
             } else {
                 console.log('User canceled the picker.');
@@ -79,7 +76,7 @@ export default function FooterAttachment({ keyboardHeight, setIsAttachment }) {
             </View>
             <View style={styles.attachmentRow}>
                 <View style={styles.attachmentItem}>
-                    <TouchableOpacity style={styles.attachmentItemButton}>
+                    <TouchableOpacity style={styles.attachmentItemButton} onPress={() => router.push("/chats/shareContacts")}>
                         <FontAwesome6 name="contact-book" size={28} color="black" />
                     </TouchableOpacity>
                     <Text style={styles.attachmentItemText}>Contacts</Text>
