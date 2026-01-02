@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { Ionicons, FontAwesome6, Entypo, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome6, Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as DocumentPicker from "expo-document-picker";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 
-export default function FooterAttachment({ keyboardHeight }) {
+export default function FooterAttachment({ keyboardHeight, setIsAttachment }) {
 
     const [selectedAssets, setSelectedAssets] = useState(null);
     const [selectedDocument, setSelectedDocument] = useState(null);
@@ -76,14 +76,14 @@ export default function FooterAttachment({ keyboardHeight }) {
                     </TouchableOpacity>
                     <Text style={styles.attachmentItemText}>Location</Text>
                 </View>
+            </View>
+            <View style={styles.attachmentRow}>
                 <View style={styles.attachmentItem}>
                     <TouchableOpacity style={styles.attachmentItemButton}>
                         <FontAwesome6 name="contact-book" size={28} color="black" />
                     </TouchableOpacity>
                     <Text style={styles.attachmentItemText}>Contacts</Text>
                 </View>
-            </View>
-            <View style={styles.attachmentRow}>
                 <View style={styles.attachmentItem}>
                     <TouchableOpacity style={styles.attachmentItemButton} onPress={pickDocument}>
                         <Ionicons name="document" size={34} color="#60adecff" />
@@ -91,22 +91,10 @@ export default function FooterAttachment({ keyboardHeight }) {
                     <Text style={styles.attachmentItemText}>Document</Text>
                 </View>
                 <View style={styles.attachmentItem}>
-                    <TouchableOpacity style={styles.attachmentItemButton}>
-                        <FontAwesome5 name="poll-h" size={34} color="#999011ff" />
+                    <TouchableOpacity style={styles.attachmentItemButton} onPress={() => setIsAttachment(false)}>
+                        <Ionicons name="chevron-down" size={34} color="black" />
                     </TouchableOpacity>
-                    <Text style={styles.attachmentItemText}>Poll</Text>
-                </View>
-                <View style={styles.attachmentItem}>
-                    <TouchableOpacity style={styles.attachmentItemButton}>
-                        <FontAwesome5 name="calendar-alt" size={34} color="#df19ceff" />
-                    </TouchableOpacity>
-                    <Text style={styles.attachmentItemText}>Event</Text>
-                </View>
-                <View style={styles.attachmentItem}>
-                    <TouchableOpacity style={styles.attachmentItemButton}>
-                        <MaterialCommunityIcons name="image-auto-adjust" size={34} color="#60adecff" />
-                    </TouchableOpacity>
-                    <Text style={styles.attachmentItemText}>AI images</Text>
+                    <Text style={styles.attachmentItemText}>Back</Text>
                 </View>
             </View>
         </View>
