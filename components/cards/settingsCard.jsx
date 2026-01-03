@@ -1,9 +1,14 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export const SettingsCard = ({ iconName, title }) => {
+
+    const router = useRouter();
     return (
-        <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10, height: 50 }}>
+        <TouchableOpacity
+            onPress={() => router.push(`/settings/help`)}
+            style={{ flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10, height: 50 }}>
             <Ionicons name={iconName} size={20} color="#555353ff" />
             <View
                 style={{
