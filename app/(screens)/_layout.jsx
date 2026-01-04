@@ -19,7 +19,7 @@ export default function ScreenLayout() {
                     headerShown: false,
                 }} />
             <Stack.Screen
-                name="setting"
+                name="settings"
                 options={{
                     headerShown: false,
                 }} />

@@ -10,6 +10,7 @@ export default function SettingLayout() {
                 name="index"
                 options={{
                     headerShown: true,
+                    headerTransparent: true,
                     title: "Settings",
                     headerLargeTitle: true,
                     headerSearchBarOptions: {
@@ -21,6 +22,7 @@ export default function SettingLayout() {
                 name="profile"
                 options={{
                     headerShown: true,
+                    headerTransparent: true,
                     title: "Profile",
                     headerBackButtonMenuEnabled: true,
                     headerBackButtonDisplayMode: "minimal",
@@ -30,6 +32,7 @@ export default function SettingLayout() {
                 name="linked"
                 options={{
                     headerShown: true,
+                    headerTransparent: true,
                     title: "Linked Devices",
                     headerLeft: () => (
                         <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />
@@ -37,9 +40,10 @@ export default function SettingLayout() {
                 }}
             />
             <Stack.Screen
-                name="Account"
+                name="account"
                 options={{
                     headerShown: true,
+                    headerTransparent: true,
                     title: "Account",
                     headerLeft: () => (
                         <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />
@@ -65,6 +69,7 @@ export default function SettingLayout() {
                 options={{
                     headerShown: true,
                     title: "Notifications",
+                    headerTransparent: false,
                     headerLeft: () => (
                         <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />
                     )
@@ -80,6 +85,7 @@ export default function SettingLayout() {
                 name="invite"
                 options={{
                     headerShown: true,
+                    headerTransparent: true,
                     title: "Invite a friend",
                     headerLeft: () => (
                         <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />

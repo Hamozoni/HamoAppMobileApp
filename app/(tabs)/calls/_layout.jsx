@@ -8,6 +8,7 @@ export default function UpdatesLayout() {
             <Stack.Screen
                 name="index"
                 options={{
+                    headerTransparent: true,
                     headerShown: true,
                     title: "Calls",
                     headerLargeTitle: true,

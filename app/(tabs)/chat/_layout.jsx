@@ -12,6 +12,7 @@ export default function ChatLayout() {
             name="index"
             options={{
                 title: "Chats",
+                headerTransparent: true,
                 headerLargeTitle: true,
                 headerSearchBarOptions: {
                     placeholder: "Search",
@@ -36,6 +37,7 @@ export default function ChatLayout() {
         <Stack.Screen
             name="camera"
             options={{
+                headerTransparent: true,
                 presentation: "fullScreenModal",
                 animation: "flip",
                 headerShown: false,
@@ -46,6 +48,7 @@ export default function ChatLayout() {
         <Stack.Screen
             name="contacts"
             options={{
+                headerTransparent: true,
                 title: "New Chat",
                 headerShown: true,
                 presentation: "modal",

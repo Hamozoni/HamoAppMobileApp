@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 import { TouchableOpacity, Text } from "react-native";
-import ChevronBackBtn from "../../../components/buttons/ChevronBackBtn";
+import ChevronBackBtn from "../../../components/buttons/chevronBackBtn";
 
 export default function SettingsLayout() {
     return (
@@ -8,19 +8,14 @@ export default function SettingsLayout() {
             <Stack.Screen
                 name="lists"
                 options={{
-                    title: "Lists",
-                    headerLeft: () => (<ChevronBackBtn />),
-                    headerRight: () => (
-                        <TouchableOpacity>
-                            <Text style={{ fontSize: 18, fontWeight: 500, color: "#2d2e2dff" }}>Record</Text>
-                        </TouchableOpacity>
-                    )
+                    headerShown: false
                 }}
             />
 
             <Stack.Screen
                 name="broadcasts"
                 options={{
+                    headerTransparent: true,
                     title: "Broadcasts messages",
                     headerLeft: () => (<ChevronBackBtn />),
                 }}
@@ -28,6 +23,7 @@ export default function SettingsLayout() {
             <Stack.Screen
                 name="starred"
                 options={{
+                    headerTransparent: true,
                     title: "Starred",
                     headerLeft: () => (<ChevronBackBtn />),
                     headerRight: () => (
