@@ -15,9 +15,7 @@ export default function SettingsLayout() {
             <Stack.Screen
                 name="broadcasts"
                 options={{
-                    headerTransparent: true,
-                    title: "Broadcasts messages",
-                    headerLeft: () => (<ChevronBackBtn />),
+                    headerShown: false,
                 }}
             />
             <Stack.Screen
