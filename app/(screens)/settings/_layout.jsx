@@ -1,21 +1,18 @@
-import { Stack, useRouter } from "expo-router";
-import { RoundedBtn } from "../../../components/ui/roundedBtn";
+import { Stack } from "expo-router";
 import { TouchableOpacity, Text } from "react-native";
+import ChevronBackBtn from "../../../components/buttons/ChevronBackBtn";
 
 export default function SettingsLayout() {
-    const router = useRouter();
     return (
         <Stack  >
             <Stack.Screen
                 name="lists"
                 options={{
                     title: "Lists",
-                    headerLeft: () => (
-                        <RoundedBtn iconName='chevron-back' onPress={() => router.back()} />
-                    ),
+                    headerLeft: () => (<ChevronBackBtn />),
                     headerRight: () => (
                         <TouchableOpacity>
-                            <Text>Record</Text>
+                            <Text style={{ fontSize: 18, fontWeight: 500, color: "#2d2e2dff" }}>Record</Text>
                         </TouchableOpacity>
                     )
                 }}
@@ -25,18 +22,14 @@ export default function SettingsLayout() {
                 name="broadcasts"
                 options={{
                     title: "Broadcasts messages",
-                    headerLeft: () => (
-                        <RoundedBtn iconName='chevron-back' onPress={() => router.back()} />
-                    ),
+                    headerLeft: () => (<ChevronBackBtn />),
                 }}
             />
             <Stack.Screen
                 name="starred"
                 options={{
                     title: "Starred",
-                    headerLeft: () => (
-                        <RoundedBtn iconName='chevron-back' onPress={() => router.back()} />
-                    ),
+                    headerLeft: () => (<ChevronBackBtn />),
                     headerRight: () => (
                         <TouchableOpacity>
                             <Text>Edit</Text>

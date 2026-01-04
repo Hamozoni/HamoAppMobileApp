@@ -2,14 +2,14 @@ import { Stack } from "expo-router";
 import { RoundedBtn } from "../../../../components/buttons/roundedBtn";
 
 
-export default function PrivacyLayout() {
+export default function SettingsStorageLayout() {
     return (
         <Stack>
             <Stack.Screen
                 name="index"
                 options={{
                     headerShown: true,
-                    title: "Privacy",
+                    title: "Storage and data",
                     headerLeft: () => (
                         <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />
                     )

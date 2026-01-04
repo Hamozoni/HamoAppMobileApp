@@ -1,5 +1,5 @@
 import { Text, View, FlatList } from "react-native";
-import { RoundedBtn } from "../../../components/ui/roundedBtn";
+import { RoundedBtn } from "../../../components/buttons/roundedBtn";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CALLS } from "../../../constants/call";
 import { CallCard } from "../../../components/cards/callCard";

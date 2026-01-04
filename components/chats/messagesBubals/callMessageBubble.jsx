@@ -1,6 +1,6 @@
 
 import { Text, View, TouchableOpacity } from "react-native";
-import { RoundedBtn } from "../../ui/roundedBtn";
+import { RoundedBtn } from "../../buttons/roundedBtn";
 
 export default function CallMessageBubble({ message }) {
     return (

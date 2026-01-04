@@ -1,5 +1,5 @@
 import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { RoundedBtn } from "../ui/roundedBtn";
+import { RoundedBtn } from "../buttons/roundedBtn";
 import { STATUSES } from "../../constants/status";
 import { StatusCard } from "../cards/statusCard";
 import { Ionicons } from "@expo/vector-icons";

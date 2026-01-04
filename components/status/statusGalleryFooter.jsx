@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView, Platform, TextInput, View } from "react-native";
-import { RoundedBtn } from "../ui/roundedBtn";
+import { RoundedBtn } from "../buttons/roundedBtn";
 
 export default function StatusGalleryFooter() {
     return (

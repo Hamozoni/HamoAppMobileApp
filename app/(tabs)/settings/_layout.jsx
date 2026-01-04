@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { RoundedBtn } from "../../../components/ui/roundedBtn";
+import { RoundedBtn } from "../../../components/buttons/roundedBtn";
 import { useRouter } from "expo-router";
 
 export default function SettingLayout() {
@@ -68,6 +68,25 @@ export default function SettingLayout() {
                     headerLeft: () => (
                         <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />
                     )
+                }}
+            />
+            <Stack.Screen
+                name="storage"
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="invite"
+                options={{
+                    headerShown: true,
+                    title: "Invite a friend",
+                    headerLeft: () => (
+                        <RoundedBtn iconName="chevron-back" onPress={() => router.back()} />
+                    ),
+                    headerSearchBarOptions: {
+                        placeholder: 'Search'
+                    }
                 }}
             />
         </Stack>

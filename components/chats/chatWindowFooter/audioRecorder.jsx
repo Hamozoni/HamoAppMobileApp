@@ -1,6 +1,6 @@
 import { View, Text, Alert } from "react-native";
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
-import { RoundedBtn } from "../../ui/roundedBtn";
+import { RoundedBtn } from "../../buttons/roundedBtn";
 
 import {
     useAudioRecorder,

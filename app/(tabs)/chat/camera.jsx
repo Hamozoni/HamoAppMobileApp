@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { AntDesign, Feather, FontAwesome6 } from "@expo/vector-icons";
-import { RoundedBtn } from "../../../components/ui/roundedBtn";
+import { RoundedBtn } from "../../../components/buttons/roundedBtn";
 import { useRouter } from "expo-router";
 
 export default function CameraScreen() {

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { RoundedBtn } from "../../../../components/ui/roundedBtn";
+import { RoundedBtn } from "../../../../components/buttons/roundedBtn";
 
 
 export default function SettingsChatsLayout() {
