@@ -20,12 +20,15 @@ const TEXT_SECONDARY = "#667781";
 const FILTERS = ["All", "Unread", "Favorites", "Groups"];
 
 const Chats = () => {
+
     const router = useRouter();
     const [activeFilter, setActiveFilter] = useState("All");
     const [isEdit, setIsEdit] = useState(false);
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
     const { chats, loading, fetchChats } = useChats();
+
+    console.log(chats)
     const registered = useContactsStore(state => state.registered);
 
     const handleEdit = () => {

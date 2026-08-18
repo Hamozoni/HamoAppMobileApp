@@ -10,6 +10,8 @@ export function useChats() {
         try {
             setLoading(true);
             const { data } = await axiosInstance.get("/chats");
+
+            console.log("chats data", data)
             setChats(data.chats);
         } catch (err: any) {
             console.error("Failed to fetch chats:", err.response?.status);
