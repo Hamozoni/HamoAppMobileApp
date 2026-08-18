@@ -202,9 +202,8 @@ export default function Login() {
 
                         {/* Info Text */}
                         <View style={styles.infoContainer}>
-                            <Ionicons name="information-circle-outline" size={20} color="#888" />
                             <Text style={styles.infoText}>
-                                We'll send you a verification code via Telegram to confirm your number.
+                                We'll send you a verification code via SMS to confirm your number.
                             </Text>
                         </View>
                     </View>
@@ -263,7 +262,8 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 16,
-        color: "#949daaff",
+        color: "#818181ff",
+        fontWeight: 500,
         textAlign: "center",
         paddingHorizontal: 20,
     },
@@ -271,9 +271,9 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     inputLabel: {
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: "600",
-        color: "#444",
+        color: "#585858ff",
         marginBottom: 10,
     },
     phoneInputContainer: {
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         borderRightWidth: 1,
         borderRightColor: "#e0e0e0",
-        backgroundColor: "#fafafa",
+        backgroundColor: "#e8f8ef",
         gap: 5,
     },
     countryFlag: {
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
     },
     countryPickerDropdown: {
-        marginTop: 8,
+        marginTop: 10,
         backgroundColor: "#fff",
         borderRadius: 12,
         borderWidth: 1,
@@ -326,7 +326,8 @@ const styles = StyleSheet.create({
         maxHeight: 250,
     },
     countryList: {
-        padding: 5,
+        // padding: 10,
+
     },
     countryOption: {
         flexDirection: "row",
@@ -365,17 +366,14 @@ const styles = StyleSheet.create({
         fontWeight: "500",
     },
     infoContainer: {
-        flexDirection: "row",
-        alignItems: "flex-start",
         marginTop: 16,
         gap: 8,
         paddingRight: 10,
     },
     infoText: {
-        flex: 1,
-        fontSize: 13,
-        color: "#888",
-        lineHeight: 18,
+        fontSize: 14,
+        color: "#818181ff",
+        fontWeight: 500
     },
     continueButton: {
         flexDirection: "row",
@@ -403,11 +401,9 @@ const styles = StyleSheet.create({
         fontWeight: "600",
     },
     termsText: {
-        textAlign: "center",
-        fontSize: 13,
-        color: "#888",
-        lineHeight: 20,
-        paddingHorizontal: 20,
+        fontSize: 14,
+        color: "#818181ff",
+        fontWeight: 500
     },
     termsLink: {
         color: "#2585d3ff",
